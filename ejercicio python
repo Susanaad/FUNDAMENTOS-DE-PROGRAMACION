@@ -1,0 +1,7 @@
+
+print ('Ingrese el radio')
+r=float(input("Ingrese el radio de la circunferencia: "))
+perimetro = 2 * 3.141516 * r
+area = 3.141516 * r**2
+print ("El perimetro de la circunferencia es:" ,  perimetro)
+print ("El area de la circunferencia es:", area)

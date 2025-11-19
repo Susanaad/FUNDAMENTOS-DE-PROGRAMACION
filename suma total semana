@@ -1,0 +1,41 @@
+#include <iostream>
+using namespace std;
+
+void sumaVentasSemana() {
+    float lunes, martes, miercoles, jueves, viernes, sabado, domingo;
+    float total;
+
+    cout << "ingrese la venta del lunes: ";
+    cin >> lunes;
+
+    cout << "ingrese la venta del martes: ";
+    cin >> martes; 
+
+    cout << "ingrese la venta del miercoles: ";
+    cin >> miercoles; 
+
+    cout << "ingrese la venta del jueves: ";
+    cin >> jueves;
+
+    cout << "ingrese la venta del viernes: ";
+    cin >> viernes;
+
+    cout << "ingrese la venta del sabado : ";
+    cin >> sabado; 
+
+    cout << "ingrese la venta del domingo : ";
+    cin >> domingo;
+
+    total = lunes + martes + miercoles + jueves + viernes + sabado + domingo;
+    cout << "el total de ventas de la semana es: " << total << endl;
+
+
+}
+
+int main()
+{
+    sumaVentasSemana();
+
+    return 0;
+
+}

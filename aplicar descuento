@@ -1,0 +1,19 @@
+#include <iostream>
+using namespace std;
+
+void aplicarDescuento(float& total) {
+    total = total - (total * 0.10);
+}
+
+int main()
+{
+    float totalcompra; 
+    cout << "ingrese total de la compra: ";
+    cin >> totalcompra;
+
+    aplicarDescuento(totalcompra);
+    cout << "El total con descuento es : " << totalcompra;
+
+    return 0;
+
+}

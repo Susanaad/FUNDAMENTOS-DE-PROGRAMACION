@@ -1,0 +1,341 @@
+	PRACTICA Nº 10
+ARREGLOS (VECTORES )
+
+
+Nombre : Susana Daniela Aduvri Sanjines
+
+
+1.	Hacer un programa para sacar el máximo valor de un vector de valores ya sean reales o enteros.
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    vector<float> v = {3.5, 7.2, 1.4, 9.8, 2.1};
+    float maximo = v[0];
+
+    for (float x : v)
+        if (x > maximo) maximo = x;
+
+    cout << "Maximo: " << maximo;
+}
+
+
+2.	Hacer un programa para sacar el mínimo valor de un vector de valores ya sean reales o enteros.
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    vector<float> v = {3.5, 7.2, 1.4, 9.8, 2.1};
+    float minimo = v[0];
+
+    for (float x : v)
+        if (x < minimo) minimo = x;
+
+    cout << "Minimo: " << minimo;
+}
+
+3.	Hacer un programa para sacar el promedio de valores de un vector.
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    vector<float> v = {2, 4, 6, 8};
+    float suma = 0;
+
+    for (float x : v) suma += x;
+
+    cout << "Promedio: " << suma / v.size();
+}
+
+4.	Hacer un programa para revertir la lista de valores de un vector, en otro vector, es decir se debe mantener el vector original.
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    vector<int> A = {1,2,3,4,5};
+    vector<int> B(A.size());
+
+    for (int i = 0; i < A.size(); i++)
+        B[i] = A[A.size() - 1 - i];
+
+    cout << "Vector revertido: ";
+    for (int x : B) cout << x << " ";
+}
+
+5.	Hacer un programa para determinar si un vector es capicúa, es decir, si el vector revertido es igual al inicial, se dice que el vector es capicúa.
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    vector<int> v = {1,2,3,2,1};
+    bool capicua = true;
+
+    for (int i = 0; i < v.size()/2; i++)
+        if (v[i] != v[v.size()-1-i]) capicua = false;
+
+    cout << (capicua ? "Es capicua" : "No es capicua");
+}
+
+
+6.	Sacar el promedio de cada tres valores consecutivos en un vector.
+P1= A1 + A2 + A3 
+P2= A2 + A3 + A4
+P3= A3 + A4 + A5
+……………………
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    vector<float> A = {1,2,3,4,5,6};
+    for (int i = 0; i < A.size() - 2; i++) {
+        float p = (A[i] + A[i+1] + A[i+2]) / 3.0;
+        cout << "P" << i+1 << ": " << p << endl;
+    }
+}
+
+7.	Dado un número entero, el programa debe devolver el valor escrito literalmente. Por ejemplo si se da 12 debe devolver 'DOCE'. Hacer esto hasta el valor 20. ¿ Es posible generalizar para 30, 31, 32, ....100,101,... etc. ?.
+
+#include <iostream>
+using namespace std;
+
+string convertir(int n) {
+    string nums[]={"CERO","UNO","DOS","TRES","CUATRO","CINCO","SEIS",
+                   "SIETE","OCHO","NUEVE","DIEZ","ONCE","DOCE","TRECE",
+                   "CATORCE","QUINCE","DIECISEIS","DIECISIETE",
+                   "DIECIOCHO","DIECINUEVE","VEINTE"};
+    return nums[n];
+}
+
+int main() {
+    int n;
+    cin >> n;
+    cout << convertir(n);
+}
+
+
+8.	Dado un vector A de n números reales, obténgase la diferencia más grande entre dos elementos consecutivos de este vector.
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    vector<float> A = {1,5,3,10,2};
+    float difMax = abs(A[1] - A[0]);
+
+    for (int i = 1; i < A.size()-1; i++) {
+        float dif = abs(A[i+1] - A[i]);
+        if (dif > difMax) difMax = dif;
+    }
+
+    cout << "Diferencia mayor: " << difMax;
+}
+
+9.	Concatenar dos vectores de tamaño n y m respectivamente. [a1,a2,......an;]  [b1,b2,....bm]; concatenado resulta [a1,a2,......an,b1,b2,....bm] con n+m elementos.
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    vector<int> A = {1,2,3};
+    vector<int> B = {4,5,6};
+    vector<int> C;
+
+    C.insert(C.end(), A.begin(), A.end());
+    C.insert(C.end(), B.begin(), B.end());
+
+    for (int x : C) cout << x << " ";
+}
+
+10.	Intercalar dos vectores A y B clasificados ascendentemente de tamaño n y m respectivamente en uno solo de tal forma que el resultado sea un vector clasificado.
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    vector<int> A = {1,3,5};
+    vector<int> B = {2,4,6};
+    vector<int> C;
+
+    int i=0, j=0;
+    while (i < A.size() && j < B.size()) {
+        if (A[i] < B[j]) C.push_back(A[i++]);
+        else C.push_back(B[j++]);
+    }
+    while (i < A.size()) C.push_back(A[i++]);
+    while (j < B.size()) C.push_back(B[j++]);
+
+    for (int x : C) cout << x << " ";
+}
+11.	Hacer un programa que permita contar número de valores negativos, positivos y ceros que hay en un vector.
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    vector<int> v = {-2, 0, 5, -1, 7};
+    int pos=0, neg=0, cer=0;
+
+    for (int x : v) {
+        if (x > 0) pos++;
+        else if (x < 0) neg++;
+        else cer++;
+    }
+
+    cout << "Positivos: " << pos << "\nNegativos: " << neg << "\nCeros: " << cer;
+}
+
+12.	Hacer un programa para eliminar los  números duplicados de un vector.
+
+#include <iostream>
+#include <vector>
+#include <unordered_set>
+using namespace std;
+
+int main() {
+    vector<int> A = {1,2,2,3,3,3,4};
+    unordered_set<int> s;
+    vector<int> B;
+
+    for (int x : A)
+        if (s.insert(x).second) B.push_back(x);
+
+    for (int x : B) cout << x << " ";
+}
+
+13.	Hacer un programa para revertir una lista en el mismo vector.
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    vector<int> v = {1,2,3,4};
+
+    for (int i = 0; i < v.size()/2; i++)
+        swap(v[i], v[v.size()-1-i]);
+
+    for (int x : v) cout << x << " ";
+}
+
+14.	Hacer un programa para clasificar una lista de valores (entero o realies) en orden ascendente.
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int main() {
+    vector<float> v = {3.2,1.1,7.5,0.4};
+    sort(v.begin(), v.end());
+
+    for (float x : v) cout << x << " ";
+}
+
+15.	Un vector tiene la lista de alumnos y otro vector tiene las notas. Hacer un programa para obtener las tres mejores notas. Sugerencia: Clasificar el vector en orden descendente y luego listar los tres primeros, hay que tener cuidado cuando se intercambia los elementos del vector de alumnos también se debe intercambiar las notas.
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int main() {
+    vector<string> alumnos = {"Ana","Luis","Pedro","Marta"};
+    vector<float> notas      = {15, 18, 12, 19};
+
+    for (int i = 0; i < notas.size()-1; i++)
+        for (int j = i+1; j < notas.size(); j++)
+            if (notas[j] > notas[i]) {
+                swap(notas[i], notas[j]);
+                swap(alumnos[i], alumnos[j]);
+            }
+
+    cout << "Top 3:\n";
+    for (int i=0; i<3; i++)
+        cout << alumnos[i] << " - " << notas[i] << endl;
+}
+
+16.	Confeccionar en un menú para manejar alumnos con las siguiente funciones: 1) Ingresar un alumno y su nota 2) Listar los alumnos 3) Ordenar alfabéticamente 4) Sacar la mejor nota 5) Sacar el promedio de notas.
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int main() {
+    vector<string> alumnos;
+    vector<float> notas;
+    int opc;
+
+    do {
+        cout << "\n1) Ingresar alumno\n2) Listar\n3) Ordenar alfabeticamente\n4) Mejor nota\n5) Promedio\n0) Salir\n";
+        cin >> opc;
+
+        if (opc == 1) {
+            string a; float n;
+            cout << "Alumno: "; cin >> a;
+            cout << "Nota: "; cin >> n;
+            alumnos.push_back(a);
+            notas.push_back(n);
+        }
+        else if (opc == 2) {
+            for (int i=0;i<alumnos.size();i++)
+                cout << alumnos[i] << " - " << notas[i] << endl;
+        }
+        else if (opc == 3) {
+            for (int i = 0; i < alumnos.size()-1; i++)
+                for (int j = i+1; j < alumnos.size(); j++)
+                    if (alumnos[j] < alumnos[i]) {
+                        swap(alumnos[i], alumnos[j]);
+                        swap(notas[i], notas[j]);
+                    }
+        }
+        else if (opc == 4) {
+            int pos = 0;
+            for (int i=1;i<notas.size();i++)
+                if (notas[i] > notas[pos]) pos = i;
+            cout << "Mejor: " << alumnos[pos] << " - " << notas[pos] << endl;
+        }
+        else if (opc == 5) {
+            float sum=0;
+            for (float n : notas) sum += n;
+            cout << "Promedio: " << sum/notas.size() << endl;
+        }
+
+    } while (opc != 0);
+}
+
+17.	Generar los primeros n números de Fibonacci en un vector.
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    int n; 
+    cin >> n;
+    vector<long long> F(n);
+
+    if (n >= 1) F[0] = 0;
+    if (n >= 2) F[1] = 1;
+
+    for (int i = 2; i < n; i++)
+        F[i] = F[i-1] + F[i-2];
+
+    for (auto x : F) cout << x << " ";
+}

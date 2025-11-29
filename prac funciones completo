@@ -1,0 +1,379 @@
+PRACTICO Nº 09
+
+Funciones 
+
+Escribir programas en lenguaje C para cada uno de los siguientes problemas.
+
+1.	Construir una función POTEN(y, y), para calcular la potencia x y de dos números reales cualesquiera.
+
+
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+double POTEN(double x, double y){
+    return pow(x, y);
+}
+
+int main(){
+    double x, y;
+    cout << "Ingrese base x y exponente y: ";
+    if(!(cin >> x >> y)) return 0;
+    cout << "Resultado: " << POTEN(x, y) << "\n";
+    return 0;
+}
+
+
+2.	Construir una función FAC(n) para calcular el factorial de un entero.
+
+#include <iostream>
+using namespace std;
+
+unsigned long long FAC(int n){
+    if(n < 0) return 0;
+    unsigned long long f = 1;
+    for(int i = 2; i <= n; ++i) f *= (unsigned long long)i;
+    return f;
+}
+
+int main(){
+    int n;
+    cout << "Ingrese n: ";
+    cin >> n;
+    cout << n << "! = " << FAC(n) << "\n";
+    return 0;
+}
+
+3.	Construir un programa, que mediante funciones, para hallar la suma de la siguiente serie, dados X y N enteros positivos:
+
+    x1         x2         x3        x4                 xN
+S =           +          +          +          + . . . + 
+          1!        2!          3!        4!                 N!
+
+
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+unsigned long long FAC(int n){
+    unsigned long long f=1;
+    for(int i=2;i<=n;++i) f*=i;
+    return f;
+}
+
+double serie(int x, int n){
+    double s=0.0;
+    for(int i=1;i<=n;++i){
+        s += pow((double)x, i) / (double)FAC(i);
+    }
+    return s;
+}
+
+int main(){
+    int x,n;
+    cout<<"Ingrese x y n: ";
+    cin>>x>>n;
+    cout<<"S = "<<serie(x,n)<<"\n";
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+4.	Construir un programa, que mediante funciones, halle la suma de la siguiente serie, dados X y N enteros positivos:
+
+    x1         x3         x5        x7                  xN
+S =           -          +          -          +/- . . .  
+                1!        3!          5!        7!                  N!
+
+
+
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+unsigned long long FAC(int n){
+    unsigned long long f=1;
+    for(int i=2;i<=n;++i) f*=i;
+    return f;
+}
+
+double serieAlt(int x, int maxOdd){
+    // maxOdd debe ser el mayor exponente impar a considerar (ej: 7)
+    double s=0.0;
+    int signo = 1;
+    for(int i=1;i<=maxOdd;i+=2){
+        s += signo * pow((double)x, i) / (double)FAC(i);
+        signo *= -1;
+    }
+    return s;
+}
+
+int main(){
+    int x, maxOdd;
+    cout<<"Ingrese x y N impar máximo (ej 7): ";
+    cin>>x>>maxOdd;
+    cout<<"S = "<<serieAlt(x, maxOdd)<<"\n";
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+5.	Construir una función que calcule la solución de un sistema de dos ecuaciones con 2 variables de la forma:
+
+Ax + By + C = 0
+Dx + Ey + F = 0
+El procedimiento debe recibir como parámetros de entrada los 6 coeficientes de la ecuación, y dar como parámetros de salida la solución (X, Y). Por ejemplo una llamada sería la siguiente: SISTEMA(1,2,3,4,5,6, X, Y), correspondiente al sistema:
+
+ x + 2y + 3 = 0
+4x + 5y + 6 = 0
+
+6.	Dada una fecha en forma de día, mes, año; mediante un procedimiento LITERAL convertirla en su equivalente literal. Por ejemplo: la fecha 20, 5, 99 se debe ser convertida e imprimir ’20 de Mayo de 1999’. La llamada para este caso sería LITERAL(20, 5, 99).
+
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+string meses[] = {"", "enero", "febrero", "marzo", "abril", "mayo", "junio",
+                  "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"};
+
+void LITERAL(int d, int m, int a){
+    if(m<1||m>12){ cout<<"Mes inválido\n"; return; }
+    cout<<d<<" de "<<meses[m]<<" de "<<a<<"\n";
+}
+
+int main(){
+    int d,m,a;
+    cout<<"Ingrese día mes año: ";
+    cin>>d>>m>>a;
+    LITERAL(d,m,a);
+    return 0;
+}
+
+7.	Dado un número combinatorio con parámetros n y r, obtener su valor numérico. Un número combinatorio se define de la siguiente forma:
+
+   n   	      n!
+Combi(n, r) =            =  ----------          donde ‘!’ es la función factorial
+		 	   r	   r! (n-r)!
+
+Construir un programa que utilice una función factorial llamada FAC(n), y luego desde el programa principal la llame de la siguiente forma:
+
+		C = FAC(n) / (FAC(r) * FAC(n-r))
+
+#include <iostream>
+using namespace std;
+
+unsigned long long FAC(int n){
+    unsigned long long f=1;
+    for(int i=2;i<=n;++i) f*=i;
+    return f;
+}
+
+unsigned long long combi(int n,int r){
+    if(r<0 || r>n) return 0;
+    return FAC(n) / (FAC(r) * FAC(n-r));
+}
+
+int main(){
+    int n,r;
+    cout<<"Ingrese n y r: ";
+    cin>>n>>r;
+    cout<<"C("<<n<<","<<r<<") = "<<combi(n,r)<<"\n";
+    return 0;
+}
+
+
+8.	Construir un procedimiento para resolver una ecuación cuadrática de la forma ax2 + bx + c = 0, considerando todos los casos; es decir dos raíces reales, dos raíces complejas o una raíz doble.
+
+#include <iostream>
+#include <cmath>
+#include <iomanip>
+using namespace std;
+
+void resolverCuad(double a,double b,double c){
+    if(fabs(a) < 1e-12){
+        if(fabs(b) < 1e-12) {
+            cout<<"No es ecuación (a=0, b=0)\n"; 
+        } else {
+            cout<<"Ecuación lineal: x = "<< -c/b << "\n";
+        }
+        return;
+    }
+    double d = b*b - 4*a*c;
+    if(d > 1e-12){
+        double r1 = (-b + sqrt(d)) / (2*a);
+        double r2 = (-b - sqrt(d)) / (2*a);
+        cout<<fixed<<setprecision(6)<<"Dos raíces reales: "<<r1<<" y "<<r2<<"\n";
+    } else if(fabs(d) <= 1e-12){
+        double r = -b / (2*a);
+        cout<<"Raíz doble: "<<r<<"\n";
+    } else {
+        double re = -b / (2*a);
+        double im = sqrt(-d) / (2*a);
+        cout<<"Raíces complejas: "<<re<<" + "<<im<<"i y "<<re<<" - "<<im<<"i\n";
+    }
+}
+
+int main(){
+    double a,b,c;
+    cout<<"Ingrese a b c: ";
+    cin>>a>>b>>c;
+    resolverCuad(a,b,c);
+    return 0;
+}
+
+
+9.	Construir una función que lea un valor binario X y devuelva como resultado su equivalente decimal.
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+long long binarioADecimal(const string &s){
+    long long dec=0;
+    for(char ch: s){
+        if(ch!='0' && ch!='1') return -1; // error
+        dec = dec*2 + (ch-'0');
+    }
+    return dec;
+}
+
+int main(){
+    string bin;
+    cout<<"Ingrese número binario (ej 1011): ";
+    cin>>bin;
+    long long res = binarioADecimal(bin);
+    if(res<0) cout<<"Entrada inválida\n"; else cout<<"Decimal = "<<res<<"\n";
+    return 0;
+}
+
+
+10.	Construir un procedimiento para convertir un número N en su equivalente en números romanos.
+
+#include <iostream>
+#include <string>
+using namespace std;
+
+string aRomano(int num){
+    if(num <= 0 || num > 3999) return "Fuera de rango (1-3999)";
+    pair<int,string> M[] = {
+        {1000,"M"},{900,"CM"},{500,"D"},{400,"CD"},
+        {100,"C"},{90,"XC"},{50,"L"},{40,"XL"},
+        {10,"X"},{9,"IX"},{5,"V"},{4,"IV"},{1,"I"}
+    };
+    string s;
+    for(auto &p : M){
+        while(num >= p.first){
+            s += p.second;
+            num -= p.first;
+        }
+    }
+    return s;
+}
+
+int main(){
+    int n;
+    cout<<"Ingrese entero (1-3999): ";
+    cin>>n;
+    cout<<aRomano(n)<<"\n";
+    return 0;
+}
+
+11.	Construir una función que convierta un número real R de hasta cuatro cifras con dos decimales en su equivalente literal. Por ejemplo: Bs 1560.50, será convertido a ‘un mil quinientos sesenta 50/100 bolivianos’
+
+
+12.	Construir una función para validar una fecha dada en día, mes y año.
+
+#include <iostream>
+using namespace std;
+
+bool esBisiesto(int a){
+    return (a%4==0 && a%100!=0) || (a%400==0);
+}
+
+bool validarFecha(int d,int m,int a){
+    if(a<=0) return false;
+    if(m < 1 || m > 12) return false;
+    int diasMes[] = {0,31,28,31,30,31,30,31,31,30,31,30,31};
+    if(esBisiesto(a)) diasMes[2]=29;
+    return d >= 1 && d <= diasMes[m];
+}
+
+int main(){
+    int d,m,a;
+    cout<<"Ingrese d m a: ";
+    cin>>d>>m>>a;
+    cout<<(validarFecha(d,m,a) ? "Fecha válida\n" : "Fecha inválida\n");
+    return 0;
+}
+
+13.	Construir una función que redondee un número real R a n decimales.
+
+#include <iostream>
+#include <cmath>
+#include <iomanip>
+using namespace std;
+
+double redondear(double R,int n){
+    double factor = pow(10.0, n);
+    return floor(R * factor + 0.5) / factor;
+}
+
+int main(){
+    double R;
+    int n;
+    cout<<"Ingrese R y n: ";
+    cin>>R>>n;
+    cout<<fixed<<setprecision(n)<<redondear(R,n)<<"\n";
+    return 0;
+}
+
+14.	Construya un procedimiento que calcule los días transcurridos entre dos fechas cualesquiera. Cada fecha está dada en día/mes/año.
+
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+long long fechaADias(int d,int m,int y){
+    if(m <= 2){
+        y -= 1;
+        m += 12;
+    }
+    long long A = y/100;
+    long long B = A/4;
+    long long C = 2 - A + B;
+    long long E = (long long)floor(365.25 * (y + 4716));
+    long long F = (long long)floor(30.6001 * (m + 1));
+    long long jd = C + d + E + F - 1524; 
+    return jd;
+}
+
+long long diasEntre(int d1,int m1,int y1,int d2,int m2,int y2){
+    long long t1 = fechaADias(d1,m1,y1);
+    long long t2 = fechaADias(d2,m2,y2);
+    return llabs(t2 - t1);
+}
+
+int main(){
+    int d1,m1,y1,d2,m2,y2;
+    cout<<"Ingrese fecha1 d m a: "; cin>>d1>>m1>>y1;
+    cout<<"Ingrese fecha2 d m a: "; cin>>d2>>m2>>y2;
+    cout<<"Días entre: "<<diasEntre(d1,m1,y1,d2,m2,y2)<<"\n";
+    return 0;
+}
